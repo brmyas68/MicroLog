@@ -1,0 +1,51 @@
+
+syntax = "proto3";
+package protoLogService;
+option go_package ="pbLogService";
+
+service LogService{
+
+    rpc Insert (RequestInsertLog) returns (ResponseInsertLog){};
+    rpc GetByWhere (RequestWhereLog) returns (stream ResponseWhereLog){};
+} 
+
+message Log{
+    int32  LogID         = 1;
+    int32  LogUserID     = 2;
+    string LogAction     = 3;
+    string LogController = 4;
+    string LogDateTime   = 5;
+    string LogMessage    = 6;
+}
+
+message RequestInsertLog{
+    Log Log = 1;
+}
+message ResponseInsertLog{
+    bool  LogState   = 1;
+    Status Status  = 2;
+}
+
+message RequestWhereLog{
+    int32  LogUserID   = 1;
+}
+
+message ResponseWhereLog{
+    Log    Log     = 1;
+    Status Status  = 2;
+}
+
+
+message Status{
+    StatusCode StatusCode       = 1;
+    StatusMessage StatusMessage = 2;
+}
+enum StatusMessage {
+    SUCCESS      = 0;
+    FAILED       = 1; 
+}
+enum StatusCode {
+    Status200 = 0;
+    Status400 = 1;
+    Status401 = 2;
+}

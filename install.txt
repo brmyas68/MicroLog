@@ -1,0 +1,14 @@
+
+npm init
+and  create   package.json
+
+"type": "module",
+npm update
+
+npm install pg
+
+npm install npm@latest -g
+
+npm install express --save
+
+npm i @grpc/grpc-js
